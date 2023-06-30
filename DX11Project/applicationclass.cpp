@@ -14,6 +14,7 @@ ApplicationClass::ApplicationClass()
 bool ApplicationClass::Init(int screenWidth, int screenHeight, HWND hwnd)
 {
 
+	char modelFilename[128];
 	char textureFilename[128];
 
 	mDirect3D = new D3DClass();
@@ -40,9 +41,10 @@ bool ApplicationClass::Init(int screenWidth, int screenHeight, HWND hwnd)
 
 	mModel = new ModelClass();
 
+	strcpy_s(modelFilename, "./data/cube.txt");
 	strcpy_s(textureFilename, "./data/stone01.tga");
 
-	if (!mModel->Init(mDirect3D->GetDevice(), mDirect3D->GetDeviceContext(), textureFilename))
+	if (!mModel->Init(mDirect3D->GetDevice(), mDirect3D->GetDeviceContext(), modelFilename, textureFilename))
 	{
 
 		MessageBox(hwnd, L"Could not initialize the model object", L"Error", MB_OK);
