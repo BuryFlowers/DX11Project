@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{f5d58106-401b-4d79-b56c-bea934a51f7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{534beeec-f5b0-4361-baad-4049092c393b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,12 @@
     <ClCompile Include="cameraclass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="textureshaderclass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="textureclass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="systemclass.h">
@@ -65,6 +74,12 @@
     <ClInclude Include="cameraclass.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="textureshaderclass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="textureclass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.vs">
@@ -73,5 +88,16 @@
     <None Include="color.ps">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="texture.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="texture.ps">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\stone01.tga">
+      <Filter>Resource</Filter>
+    </Image>
   </ItemGroup>
 </Project>

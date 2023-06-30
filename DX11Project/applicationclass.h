@@ -9,7 +9,7 @@
 #include "d3dclass.h"
 #include "cameraclass.h"
 #include "modelclass.h"
-#include "colorshaderclass.h"
+#include "textureshaderclass.h"
 
 ///////////
 //GLOBALS//
@@ -41,7 +41,7 @@ private:
 	D3DClass* mDirect3D;
 	CameraClass* mCamera;
 	ModelClass* mModel;
-	ColorShaderClass* mColorShader;
+	TextureShaderClass* mTextureShader;
 
 };
 

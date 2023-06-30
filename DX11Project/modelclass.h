@@ -5,6 +5,8 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+#include "textureclass.h"
+
 using namespace DirectX;
 
 class ModelClass
@@ -16,11 +18,13 @@ public:
 	ModelClass(const ModelClass&) = delete;
 	~ModelClass() = default;
 
-	bool Init(ID3D11Device*);
+	bool Init(ID3D11Device*, ID3D11DeviceContext*, char*);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
 	int GetIndexCount();
+
+	ID3D11ShaderResourceView* GetTexture();
 
 private:
 
@@ -28,16 +32,19 @@ private:
 	{
 
 		XMFLOAT3 position;
-		XMFLOAT4 color;
+		XMFLOAT2 texture;
 
 	};
 
 	bool InitBuffers(ID3D11Device*);
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext*);
+	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*, char*);
+	void ReleaseTexture();
 
 	ID3D11Buffer* mVertexBuffer, * mIndexBuffer;
 	int mVertexCount, mIndexCount;
+	TextureClass* mTexture;
 
 };
 
