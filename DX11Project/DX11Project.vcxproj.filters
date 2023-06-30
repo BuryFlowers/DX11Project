@@ -45,10 +45,13 @@
     <ClCompile Include="cameraclass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="textureshaderclass.cpp">
+    <ClCompile Include="lightshaderclass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="textureclass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lightclass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,30 +77,27 @@
     <ClInclude Include="cameraclass.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="textureshaderclass.h">
+    <ClInclude Include="lightshaderclass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="textureclass.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="color.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="color.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture.ps">
-      <Filter>Shaders</Filter>
-    </None>
+    <ClInclude Include="lightclass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\stone01.tga">
       <Filter>Resource</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="light.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="light.ps">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

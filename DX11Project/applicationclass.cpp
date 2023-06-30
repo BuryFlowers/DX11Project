@@ -6,7 +6,8 @@ ApplicationClass::ApplicationClass()
 	mDirect3D = nullptr;
 	mCamera = nullptr;
 	mModel = nullptr;
-	mTextureShader = nullptr;
+	mLight = nullptr;
+	mLightShader = nullptr;
 
 }
 
@@ -49,16 +50,19 @@ bool ApplicationClass::Init(int screenWidth, int screenHeight, HWND hwnd)
 
 	}
 
-	mTextureShader = new TextureShaderClass();
+	mLightShader = new LightShaderClass();
 
-	if (!mTextureShader->Init(mDirect3D->GetDevice(), hwnd))
+	if (!mLightShader->Init(mDirect3D->GetDevice(), hwnd))
 	{
 
-		MessageBox(hwnd, L"Could not initialize the texture shader object", L"Error", MB_OK);
+		MessageBox(hwnd, L"Could not initialize the light shader object", L"Error", MB_OK);
 		return false;
 
 	}
 
+	mLight = new LightClass();
+	mLight->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mLight->SetDirection(0.0f, 0.0f, 1.0f);
 
 	return true;
 
@@ -67,12 +71,20 @@ bool ApplicationClass::Init(int screenWidth, int screenHeight, HWND hwnd)
 void ApplicationClass::Shutdown()
 {
 
-	if (mTextureShader)
+	if (mLight)
 	{
 
-		mTextureShader->Shutdown();
-		delete mTextureShader;
-		mTextureShader = nullptr;
+		delete mLight;
+		mLight = 0;
+
+	}
+
+	if (mLightShader)
+	{
+
+		mLightShader->Shutdown();
+		delete mLightShader;
+		mLightShader = nullptr;
 
 	}
 
@@ -108,11 +120,15 @@ void ApplicationClass::Shutdown()
 bool ApplicationClass::Frame()
 {
 
-	return Render();
+	static float rotation = 0.0f;
+
+	rotation -= 0.00174532925f;
+	if (rotation < 0.0f) rotation += XM_2PI;
+	return Render(rotation);
 
 }
 
-bool ApplicationClass::Render()
+bool ApplicationClass::Render(float rotation)
 {
 
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
@@ -125,9 +141,11 @@ bool ApplicationClass::Render()
 	mCamera->GetViewMatrix(viewMatrix);
 	mDirect3D->GetProjectionMatrix(projectionMatrix);
 
+	worldMatrix = XMMatrixRotationY(rotation);
+
 	mModel->Render(mDirect3D->GetDeviceContext());
 
-	if (!mTextureShader->Render(mDirect3D->GetDeviceContext(), mModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, mModel->GetTexture())) return false;
+	if (!mLightShader->Render(mDirect3D->GetDeviceContext(), mModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, mModel->GetTexture(), mLight->GetDirection(), mLight->GetDiffuseColor())) return false;
 
 	mDirect3D->EndScene();
 	return true;

@@ -24,11 +24,12 @@
     <ClCompile Include="colorshaderclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
+    <ClCompile Include="lightclass.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
-    <ClCompile Include="textureshaderclass.cpp" />
+    <ClCompile Include="lightshaderclass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="applicationclass.h" />
@@ -36,19 +37,18 @@
     <ClInclude Include="colorshaderclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="inputclass.h" />
+    <ClInclude Include="lightclass.h" />
     <ClInclude Include="modelclass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
-    <ClInclude Include="textureshaderclass.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="color.ps" />
-    <None Include="color.vs" />
-    <None Include="texture.ps" />
-    <None Include="texture.vs" />
+    <ClInclude Include="lightshaderclass.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\stone01.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="light.ps" />
+    <None Include="light.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

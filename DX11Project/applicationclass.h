@@ -9,7 +9,8 @@
 #include "d3dclass.h"
 #include "cameraclass.h"
 #include "modelclass.h"
-#include "textureshaderclass.h"
+#include "lightclass.h"
+#include "lightshaderclass.h"
 
 ///////////
 //GLOBALS//
@@ -34,14 +35,15 @@ public:
 
 private:
 
-	bool Render();
+	bool Render(float);
 
 private:
 
 	D3DClass* mDirect3D;
 	CameraClass* mCamera;
 	ModelClass* mModel;
-	TextureShaderClass* mTextureShader;
+	LightClass* mLight;
+	LightShaderClass* mLightShader;
 
 };
 

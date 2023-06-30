@@ -108,38 +108,78 @@ bool TextureClass::LoadTarga32Bit(char* filename)
 	mWidth = (int)targaFileHeader.width;
 	bpp = (int)targaFileHeader.bpp;
 
-	if (bpp != 32) return false;
-
-	imageSize = mHeight * mWidth * 4;
-	targaImage = new unsigned char[imageSize];
-
-	if ((unsigned int)fread(targaImage, 1, imageSize, filePtr) != imageSize) return false;
-
-	if (fclose(filePtr) != 0) return false;
-
-	mTargaData = new unsigned char[imageSize];
-	index = 0;
-	int k = (mHeight * mWidth * 4) - (mWidth * 4);
-
-	for (int j = 0; j < mHeight; j++)
+	if (bpp == 32)
 	{
 
-		for (int i = 0; i < mWidth; i++)
+		imageSize = mHeight * mWidth * 4;
+		targaImage = new unsigned char[imageSize];
+
+		if ((unsigned int)fread(targaImage, 1, imageSize, filePtr) != imageSize) return false;
+
+		if (fclose(filePtr) != 0) return false;
+
+		mTargaData = new unsigned char[imageSize];
+		index = 0;
+		int k = (mHeight * mWidth * 4) - (mWidth * 4);
+
+		for (int j = 0; j < mHeight; j++)
 		{
 
-			mTargaData[index + 0] = targaImage[k + 2];
-			mTargaData[index + 1] = targaImage[k + 1];
-			mTargaData[index + 2] = targaImage[k + 0];
-			mTargaData[index + 3] = targaImage[k + 3];
+			for (int i = 0; i < mWidth; i++)
+			{
 
-			k += 4;
-			index += 4;
+				mTargaData[index + 0] = targaImage[k + 2];
+				mTargaData[index + 1] = targaImage[k + 1];
+				mTargaData[index + 2] = targaImage[k + 0];
+				mTargaData[index + 3] = targaImage[k + 3];
+
+				k += 4;
+				index += 4;
+
+			}
+
+			k -= mWidth * 8;
 
 		}
 
-		k -= mWidth * 8;
+	}
+	else if (bpp == 24)
+	{
+
+		imageSize = mHeight * mWidth * 3;
+		targaImage = new unsigned char[mHeight * mWidth * 4];
+
+		if ((unsigned int)fread(targaImage, 1, imageSize, filePtr) != imageSize) return false;
+
+		if (fclose(filePtr) != 0) return false;
+
+		mTargaData = new unsigned char[mHeight * mWidth * 4];
+		index = 0;
+		int k = (mHeight * mWidth * 3) - (mWidth * 3);
+
+		for (int j = 0; j < mHeight; j++)
+		{
+
+			for (int i = 0; i < mWidth; i++)
+			{
+
+				mTargaData[index + 0] = targaImage[k + 2];
+				mTargaData[index + 1] = targaImage[k + 1];
+				mTargaData[index + 2] = targaImage[k + 0];
+				mTargaData[index + 3] = 255;
+
+				k += 3;
+				index += 4;
+
+			}
+
+			k -= mWidth * 6;
+
+		}
 
 	}
+
+	else return false;
 
 	delete[] targaImage;
 	targaImage = 0;
